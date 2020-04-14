@@ -11,7 +11,7 @@ set (CMAKE_INCLUDE_CURRENT_DIR ON)
 include (${CMAKE_ROOT}/Modules/CheckFunctionExists.cmake)
 check_function_exists (pow HAVE_POW)
 
-# 加入一个配置头文件，用于处理 CMake 对源码的设置
+# 加入一个配置头文件，用于处理 CMake 对源码的设置，根据config.h.in生成config.h
 configure_file (
   "${PROJECT_SOURCE_DIR}/config.h.in"
   "${PROJECT_BINARY_DIR}/config.h"
@@ -32,7 +32,7 @@ aux_source_directory(. DIR_SRCS)
 add_executable(Demo ${DIR_SRCS})
 target_link_libraries (Demo  ${EXTRA_LIBS})
 
-# 指定安装路径
+# 指定安装路径，DESTINATION是cmake内置宏，默认是/usr/local/，可以通过修改 CMAKE_INSTALL_PREFIX 变量的值来指定
 install (TARGETS Demo DESTINATION bin)
 install (FILES "${PROJECT_BINARY_DIR}/config.h"
          DESTINATION include)
@@ -60,10 +60,14 @@ do_test (5 2 "is 25")
 do_test (10 5 "is 100000")
 do_test (2 10 "is 1024")
 
-# 构建一个 CPack 安装包
+# 构建一个 CPack 安装包。
+# cpack -C CPackConfig.cmake 生成二进制安装包
+# cpack -C CPackSourceConfig.cmake 生成源码安装包
+# 导入InstallRequiredSystemLibraries，cpack需要
 include (InstallRequiredSystemLibraries)
 set (CPACK_RESOURCE_FILE_LICENSE
   "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
 set (CPACK_PACKAGE_VERSION_MAJOR "${Demo_VERSION_MAJOR}")
 set (CPACK_PACKAGE_VERSION_MINOR "${Demo_VERSION_MINOR}")
+# 包含CPack
 include (CPack)
