@@ -60,7 +60,7 @@ do_test (5 2 "is 25")
 do_test (10 5 "is 100000")
 do_test (2 10 "is 1024")
 
-# 构建一个 CPack 安装包。
+# 构建一个 CPack 安装包。要先cmake，才能执行cpack命令
 # cpack -C CPackConfig.cmake 生成二进制安装包
 # cpack -C CPackSourceConfig.cmake 生成源码安装包
 # 导入InstallRequiredSystemLibraries，cpack需要
