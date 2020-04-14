@@ -8,11 +8,11 @@ project (Demo3)
 # 并将名称保存到 DIR_SRCS 变量
 aux_source_directory(. DIR_SRCS)
 
-# 添加 math 子目录
+# 添加 math 子目录，math目录会被编译处理
 add_subdirectory(math)
 
-# 指定生成目标
+# 指定生成目标，生成可执行文件Demo
 add_executable(Demo ${DIR_SRCS})
 
-# 添加链接库
+# 添加链接库，可执行文件Demo需要一个连接库MathFunctions
 target_link_libraries(Demo MathFunctions)
