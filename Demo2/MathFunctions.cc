@@ -7,7 +7,7 @@
  */
 double power(double base, int exponent)
 {
-    int result = base;
+    double result = base; // int -> double，否则可能丢失精度
     int i;
 
     if (exponent == 0) {
@@ -15,7 +15,7 @@ double power(double base, int exponent)
     }
     
     for(i = 1; i < exponent; ++i){
-        result = result * base;
+        result = result * base; // 窄化转型，会丢失精度啊
     }
 
     return result;

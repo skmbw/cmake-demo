@@ -1,6 +1,7 @@
 # CMake 最低版本号要求
 cmake_minimum_required (VERSION 2.8)
-
+# cygwin不再定义CYGWIN_WIN32变量
+set(CMAKE_LEGACY_CYGWIN_WIN32 0)
 # 项目信息
 project (Demo2)
 
