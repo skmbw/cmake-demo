@@ -7,8 +7,7 @@ project (Demo4)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # 是否使用自己的 MathFunctions 库
-option (USE_MYMATH
-	   "Use provided math implementation" ON)
+option (USE_MYMATH "Use provided math implementation" ON) # ON 表示打开
 
 # 加入一个配置头文件，用于处理 CMake 对源码的设置
 # ${PROJECT_SOURCE_DIR} 和 ${PROJECT_BINARY_DIR} 是cmake定义的？是的，是cmake内置宏变量
@@ -20,8 +19,8 @@ configure_file (
 
 # 是否加入 MathFunctions 库
 if (USE_MYMATH)
-  include_directories ("${PROJECT_SOURCE_DIR}/math")
-  add_subdirectory (math)
+  include_directories ("${PROJECT_SOURCE_DIR}/math") # 这个是添加头文件
+  add_subdirectory (math) # 这个是添加源码子目录，或者模块子目录，里面有CMakeLists.txt
   set (EXTRA_LIBS ${EXTRA_LIBS} MathFunctions) # 定义变量EXTRA_LIBS，它的值是MathFunctions
 endif (USE_MYMATH)
 
